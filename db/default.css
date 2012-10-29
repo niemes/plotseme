@@ -1,0 +1,233 @@
+body
+{
+color: #222;
+font-family: 'trebuchet ms', helvetica, arial, sans-serif;
+font-size: 11px;
+text-align: justify;
+background-color: #FFF;
+}
+
+b
+{
+}
+
+.left
+{
+text-align: left;
+}
+
+.right
+{
+text-align: right;
+}
+
+.center
+{
+text-align: center;
+}
+
+.justify
+{
+text-align: justify;
+}
+
+A
+{
+text-decoration: none;
+color: #c60;
+}
+
+A:link
+{
+text-decoration: none;
+color: #c60;
+}
+
+A:visited
+{
+color: #c60;
+text-decoration: none;
+}
+
+A:hover
+{
+text-decoration: underline;
+color: #c60;
+}
+
+A:active
+{
+text-decoration: underline;
+color: #900;
+}
+
+ul
+{
+list-style-type: circle;
+list-style-position: outside;
+margin-left: -20px;
+}
+
+img
+{
+margin: 5px;
+padding: 2px;
+border-width: 0px;
+}
+
+hr
+{
+width: 100%;
+border-color: #c60;
+border-width: 1px 0 0 0;
+border-style: dashed;
+}
+
+textarea
+{
+font-family: 'trebuchet ms', helvetica, arial, sans-serif;
+font-size: 11px;
+width:100%;
+text-align: justify;
+}
+
+input
+{
+font-family: 'trebuchet ms', helvetica, arial, sans-serif;
+font-size: 11px;
+}
+
+fieldset {
+border-width: 0px;
+}
+
+table {
+font-family: 'trebuchet ms', helvetica, arial, sans-serif;
+font-size: 11px;
+}
+
+td {
+align: top;
+}
+
+.searchform {
+display: inline;
+border: 0px;
+}
+
+.clearer {
+clear: both;
+}
+
+.highlight {
+color:#f00;
+background-color:#fc6;
+}
+
+// back links
+.blinks
+{
+line-height: 10px;
+text-align: right;
+}
+A.blinks
+{
+color: #777;
+}
+
+A.blinks:hover
+{
+text-decoration: none;
+color: #333;
+}
+
+A.blinks: visited
+{
+text-decoration: none;
+color: #777;
+}
+
+A.blinks: active
+{
+text-decoration: none;
+color: #777;
+}
+
+
+.box {
+background-color: #FFF;
+border-color: #c60;
+border-width: 1px;
+border-style: dashed;
+padding:10px;
+}
+
+#page_top{
+background-color: #FFF;
+}
+
+#page_frame{
+background-color: #FFF;
+}
+
+#page_left{
+float:left;
+width:140px;
+}
+
+#page_right{
+padding:10px;
+float:right;
+width:140px;
+background-color: #FFF;
+}
+
+#page_bottom{
+clear:both;
+background-color: #FFF;
+}
+
+#header
+{
+font-size: 11px;
+padding:10px;
+color: inherit;
+background-color: inherit;
+}
+
+#menu
+{
+padding: 10px;
+color: inherit;
+background-color: #FFF;
+}
+
+#content
+{
+padding:10px;
+margin-left:160px;
+text-align: justify;
+color: inherit;
+background-color: #FFF;
+}
+
+#title
+{
+margin-left:140px;
+padding:10px;
+font-size: 64px;
+font-family: Georgia, Garamond, "Times New Roman", Times, serif;
+font-weight: lighter !important;
+line-height: 30px;
+text-decoration: none;
+color: inherit;
+background-color: #FFF;
+text-align: left;
+}
+
+#footer
+{
+clear:both;
+color: inherit;
+background-color: #FFF;
+}
