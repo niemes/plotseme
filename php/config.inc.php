@@ -23,7 +23,7 @@
 	define("ADMIN_USER_PASSWORD", "plot");				// master user password
 	
 	define("SITE_DESCRIPTION","plotseme web site");
-	define("SITE_KEYWORDS","plotseme, plot, guillaume");
+	define("SITE_KEYWORDS","plotseme, plot");
 	
 	define("SITE_INDEX","Index");					// site page index name
 	define("DEFAULT_TEMPLATE",".default_template"); // default template page name
