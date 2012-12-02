@@ -39,7 +39,7 @@ function twit($message){
 	
 
 	$html = "[html]";
-	$html .= "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"".($message)."\" data-url=\"".$pageURL."\" data-counturl=\"http://groups.google.com/group/twitter-api-announce\">".($message)."</a>";
+	$html .= "<a href=\"https://twitter.com/share\" title=\"".($message)."\" class=\"twitter-share-button\" data-text=\"".($message)."\" data-url=\"".$pageURL."\">".($message)."</a>";
 	$html .= "<script type=\"text/javascript\">\r";
 	$html .= "!function(d,s,id){\r";
 	$html .= "var js,fjs=d.getElementsByTagName(s)[0];\r";
