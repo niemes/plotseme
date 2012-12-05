@@ -40,7 +40,7 @@ INSERT INTO `@SQL_TABLE_PAGES@` (`name`, `text`, `keywords`, `modification_date`
 ('.copyright', '(cc) 010175.net', '', '2007-10-28 17:30:53', '2007-10-27 16:50:22', '', ''),
 ('.title', '#TITLE', '', '2007-11-21 18:14:28', '2007-10-28 18:26:37', '::1', ''),
 ('Liste', '[b]LISTE[/b]\n\n{}', '', '2007-12-23 15:48:45', '2007-10-27 15:01:39', '::1', ''),
-('.skeleton', '<div id=page_frame>\n<div id=page_top>\n<div id=header>[.header]</div>\n<div id=menu>[.menu]</div>\n</div>\n<div id=page_left>\n<div class=box>\n[liste]\n</div>\n<br />\n<div class=box>\n[.links]\n</div>\n<br />\n<div class=box>\n[.search]\n</div>\n</div>\n<div id=title>[.title]</div>\n#CONTENT\n<div id=page_bottom>\n[.footer]\n[.copyright]\n</div>\n</div>', '', '2007-12-26 10:53:23', '2007-10-27 15:43:01', '::1', ''),
+('.default_template', '<div id=page_frame>\n<div id=page_top>\n<div id=header>[.header]</div>\n<div id=menu>[.menu]</div>\n</div>\n<div id=page_left>\n<div class=box>\n[liste]\n</div>\n<br />\n<div class=box>\n[.links]\n</div>\n<br />\n<div class=box>\n[.search]\n</div>\n</div>\n<div id=title>[.title]</div>\n#CONTENT\n<div id=page_bottom>\n[.footer]\n[.copyright]\n</div>\n</div>', '', '2007-12-26 10:53:23', '2007-10-27 15:43:01', '::1', ''),
 ('.header', '[b]Plotsème de Publication Plot[/b]', '', '2007-12-27 17:03:05', '2007-02-27 11:41:57', '::1', ''),
 ('index', '', 'special', '2008-01-06 16:57:50', '2007-11-20 23:32:34', '::1', ''),
 ('.links', '[b]SPECIAL[/b]\n\n{special}\n\n', '', '2007-12-24 14:15:28', '2007-12-24 10:39:55', '::1', ''),
