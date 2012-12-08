@@ -1,5 +1,4 @@
 
-
 var $spe=500;
 var $na=document.getElementsByClassName('blink');
 
@@ -405,7 +404,7 @@ function fileDeleteFunction(path, name, sort_by)
 
 function fileNewFolderFunction(path, name, sort_by)
 {
-	alert(path+" -> "+name);
+	//alert(path+" -> "+name);
 	
 	var xmlHttp;
 	var $url = 'index.php';
