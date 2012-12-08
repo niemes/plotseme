@@ -1,4 +1,5 @@
 
+
 var $spe=500;
 var $na=document.getElementsByClassName('blink');
 
@@ -40,30 +41,25 @@ function loginFunction()
 {
 	var xmlHttp = null;
 	
-	var $user= '?user='+document.getElementById('user').value;
-	var $pass= '&password='+document.getElementById('password').value;
+	var $user= 'user='+encodeURIComponent(document.getElementById('user').value);
+	var $pass= 'password='+encodeURIComponent(document.getElementById('password').value);
 	
 	if (document.getElementById('admin')){
-		var $edit= '&admin='+document.getElementById('admin').value;
+		var $edit= 'admin='+encodeURIComponent(document.getElementById('admin').value);
 		
 	} else if (document.getElementById('refer')) {
-		var $edit= '&edit='+document.getElementById('refer').value;
+		var $edit= 'edit='+encodeURIComponent(document.getElementById('refer').value);
 		
 	} else {
-		var $edit= '&browse='+document.getElementById('refer').value;
+		var $edit= 'browse='+encodeURIComponent(document.getElementById('refer').value);
 	}
-	
 	
 	if (!$edit){
 		$edit = '';
 	}
 	
-	var $url = 'index.php'; // default index.php
-	
-	//alert($url+$user+$pass+$edit);
-	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+encodeURI($user+$pass+$edit+"&ajax"),true);
+	xmlHttp.open("GET",'index.php?'+$user+'&'+$pass+'&'+$edit+"&ajax",true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache");
     xmlHttp.send(null);
@@ -87,7 +83,7 @@ function adminFunction()
 	var $param = '?admin=';
 	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+encodeURI($param+$page_name+"&ajax"),true);
+	xmlHttp.open("GET",'index.php?admin='+encodeURIComponent($page_name)+"&ajax",true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT"); // IE Ajax Cache Hack
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache"); // idem
     xmlHttp.send(null);
@@ -247,13 +243,9 @@ function dumpDBFunction()
 function editFunction($page_name)
 {
 	var xmlHttp = null;
-	//var $page_name = document.title;
-	
-	var $url = 'index.php'; // default index.php
-	var $param = '?edit=';
 	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+encodeURI($param+$page_name+"&ajax="),true);
+	xmlHttp.open("GET",'index.php?edit='+encodeURIComponent($page_name)+"&ajax=true", true);
 	xmlHttp.setRequestHeader("Accept","text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"); // IE Header Hack
 	xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT"); // IE Cache Hack
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache"); // idem
@@ -276,7 +268,6 @@ function editFunction($page_name)
 
 function saveFunction()
 {
-
 	var xmlHttp;
 	var $name = document.getElementById('name').value;
 	var $author = document.getElementById('author_field').value;
@@ -284,14 +275,14 @@ function saveFunction()
 	var $template = document.getElementById('template_field').value;
 	
 	var $url = 'index.php'; // default index.php
-	var $param = "content="+escape(encodeURI(document.getElementById('edit_field').value))+ "&save="+$name+ "&author="+$author+ "&keywords="+$keywords+ "&template="+$template;
-	//alert($param);
+	var $param = "content="+escape(encodeURIComponent(document.getElementById('edit_field').value))+"&save="+encodeURIComponent($name)+ "&author="+encodeURIComponent($author)+ "&keywords="+encodeURIComponent($keywords)+ "&template="+encodeURIComponent($template)+"&ajax";
+
 	xmlHttp = getHTTPObject();
 	xmlHttp.open("POST", $url,true);
 	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 	//xmlHttp.setRequestHeader("Content-length", $param.length);
 	xmlHttp.setRequestHeader("Connection", "close");
-	xmlHttp.send($param+"&ajax");
+	xmlHttp.send($param);
 	
 	xmlHttp.onreadystatechange=function()
 	{
@@ -311,14 +302,13 @@ function saveAndCloseFunction()
 	var $template = document.getElementById('template_field').value;
 	
 	var $url = 'index.php'; // default index.php
-	var $param = "content="+escape(encodeURI(document.getElementById('edit_field').value))+ "&saveandclose="+$name+ "&author="+$author+ "&keywords="+$keywords+ "&template="+$template;
-	//alert($param);
+	var $param = "content="+escape(encodeURIComponent(document.getElementById('edit_field').value))+"&saveandclose="+encodeURIComponent($name)+ "&author="+encodeURIComponent($author)+ "&keywords="+encodeURIComponent($keywords)+ "&template="+encodeURIComponent($template)+"&ajax";
 	xmlHttp = getHTTPObject();
 	xmlHttp.open("POST", $url,true);
 	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 	//xmlHttp.setRequestHeader("Content-length", $param.length);
 	xmlHttp.setRequestHeader("Connection", "close");
-	xmlHttp.send($param+"&ajax");
+	xmlHttp.send($param);
 	
 	xmlHttp.onreadystatechange=function()
 	{
@@ -333,13 +323,10 @@ function saveAndCloseFunction()
 function cancelFunction()
 {
 	var xmlHttp;
-	var $page_name = document.title;
-	
-	var $url = 'index.php'; // default index.php
-	var $param = '?browse=';
+	var $page_name = document.getElementById('name').value;
 	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+encodeURI($param+$page_name+"&ajax"),true);
+	xmlHttp.open("GET",'index.php?browse='+encodeURIComponent($page_name)+"&ajax",true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT"); // IE Cach hack
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache"); // idem
     xmlHttp.send(null);
@@ -357,10 +344,9 @@ function cancelFunction()
 function fileBrowseFunction(path,sort_by)
 {
 	var xmlHttp;
-	var $url = 'index.php';
 	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+'?file_browse='+path+'&sort_by='+sort_by,true);
+	xmlHttp.open("GET",'index.php?file_browse='+encodeURIComponent(path)+'&sort_by='+sort_by,true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache");
     xmlHttp.send(null);
@@ -378,14 +364,10 @@ function fileBrowseFunction(path,sort_by)
 
 function fileDeleteFunction(path, name, sort_by)
 {
-	
-	//alert(path+" -> "+name);
-	
 	var xmlHttp;
-	var $url = 'index.php';
-	
+
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+'?file_delete='+name+'&file_browse='+path+'&sort_by='+sort_by,true);
+	xmlHttp.open("GET",'index.php?file_delete='+encodeURIComponent(name)+'&file_browse='+encodeURIComponent(path)+'&sort_by='+sort_by,true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache");
     xmlHttp.send(null);
@@ -404,13 +386,10 @@ function fileDeleteFunction(path, name, sort_by)
 
 function fileNewFolderFunction(path, name, sort_by)
 {
-	//alert(path+" -> "+name);
-	
 	var xmlHttp;
-	var $url = 'index.php';
-	
+
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+'?file_new_folder='+name+'&file_browse='+path+'&sort_by='+sort_by,true);
+	xmlHttp.open("GET",'index.php?file_new_folder='+encodeURIComponent(name)+'&file_browse='+encodeURIComponent(path)+'&sort_by='+sort_by,true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache");
     xmlHttp.send(null);
@@ -461,15 +440,11 @@ function insertTag(openTag, closeTag) {
   
 function searchFunction() {
 	var xmlHttp;
-	var $page_name = document.title;
-	
-	var $url = 'index.php'; // default index.php
-	var $param = '?search=';
 	
 	var $search_string = document.getElementById('search_text').value;
 	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+encodeURI($param+$search_string+"&ajax"),true);
+	xmlHttp.open("GET",'index.php?search='+encodeURIComponent($search_string)+'&ajax',true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");  // IE Cach hack
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache"); // idem
     xmlHttp.send(null);
