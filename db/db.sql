@@ -1,27 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 2.7.0-beta1
--- http://www.phpmyadmin.net
--- 
--- Host: 127.0.0.1
--- Generation Time: Nov 28, 2007 at 04:54 PM
--- Server version: 5.0.18
--- PHP Version: 5.2.4
--- 
--- Database: `plot2`
--- 
-
--- CREATE DATABASE `plot4` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
--- USE 1175;
-
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `plot_pages`
--- 
-
 CREATE TABLE IF NOT EXISTS `@SQL_TABLE_PAGES@` (
-  `name` varchar(255) NOT NULL default '',
+  `name` varchar(255) NOT NULL default 'lost and found',
   `text` text,
   `keywords` varchar(255) default NULL,
   `modification_date` timestamp NOT NULL default CURRENT_TIMESTAMP,

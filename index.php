@@ -81,7 +81,7 @@
 	}
 
 	// delete a file
-	if (isset($_REQUEST['file_delete'])){ // browse file
+	if (isset($_REQUEST['file_delete'])){ // delete a file
 		if ($user->user_privilege>1){ // ok to browse
 			
 			include_once('php/file_browser.class.php');
@@ -98,6 +98,26 @@
 			echo 'file delete access denied';
 		}
 	}
+	
+	// new folder
+	if (isset($_REQUEST['file_new_folder'])){ // create a new folder
+		if ($user->user_privilege>1){ // ok to create new folder
+			
+			include_once('php/file_browser.class.php');
+			
+			$file_browser_dir = get_request('file_browse');
+			$dir_name = get_request('file_new_folder');
+			$file_browser = new file_browser();
+			$file_browser->create_dir($file_browser_dir, $dir_name);
+			
+			echo $file_browser->browse_dir($file_browser_dir,$_REQUEST['sort_by']);
+			
+			die();
+		} else {
+			echo 'file create folder access denied';
+		}
+	}
+	
 	
 	// new file_browser
 	if (isset($_REQUEST['file_browse'])){ // browse file

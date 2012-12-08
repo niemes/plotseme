@@ -76,13 +76,14 @@
 		} 
 		
 		function create_dir($path,$dir_name){
-			$good_path = $path."/";
-			$long_path = realpath($this->root_dir.$path).'/'; // build absolute path
+			$long_path = realpath($this->root_dir."/".$path).'/'; // build absolute path
 			
 			// avoid ../ in path !!
-			if ($long_path !== ($this->root_dir.$good_path)) {
+			if ($long_path !== ($this->root_dir."/".$path)) {
 				
-				log_err("file browser error; .. in path ".$this->root_dir.$good_path);
+				log_err("file browser error; .. in path ".$this->root_dir.$path);
+				echo("file browser error; .. in path ".$this->root_dir."/".$path." not ".$long_path);
+				
 				return "file browser error; .. in path";
 			}
 			
@@ -90,8 +91,11 @@
 			
 			if ($no_err == true) {
 				log_err("directory created");
+				echo("directory created");
 			} else {
 				log_err("failed to create directory");
+				echo("failed to create directory");
+				
 			}
 		}
 		
@@ -125,15 +129,17 @@
 			//if (is_dir($long_path.basename($file_name))){
 			//	$no_err = rmdir($long_path.basename($file_name));
 			//} else {
-				echo 'delete'. $long_path.'/'.basename($file_name);
+				
 			 	@chmod($long_path.'/'.basename($file_name), 0666);
 				$no_err = unlink ($long_path.'/'.basename($file_name));
 			//}
 		
 			if ($no_err == true) {
 				log_err($file_name." file deleted");
+				echo 'delete '. $long_path.'/'.basename($file_name);
 			} else {
 				log_err($file_name." failed to delete file");
+				echo 'failed to delete '. $long_path.'/'.basename($file_name);
 			}
 			
 		}
@@ -241,10 +247,10 @@
 			
 			$this->html .= $html;
 
-			$this->html .='<div><form id="new_folder_form" method="post" action="'.PAGE_INDEX.'#fb" title="New Folder">
-			Nouveau dossier: <input type="text" name="new_folder_name" size="20" />
-			<input type="hidden" name="new_folder_path" value="'.$path.'" />
-			<input type="submit" name="new_folder_submit" value="Ok" />
+			//$this->html .='<div><form id="new_folder_form" method="post" action="'.PAGE_INDEX.'#fb" title="New Folder">
+			$this->html .= 'Nouveau dossier: <input type="text" id="new_folder_name" size="20" />
+			<input type="submit" id="new_folder_submit" value="Ok" onmouseup="var newFolderName = document.getElementById(\'new_folder_name\').value; 
+			javascript:fileNewFolderFunction(\''.$path.'\',newFolderName,\''.$sort_by.'\');">
 			</div>';
 			
 			return $this->html;

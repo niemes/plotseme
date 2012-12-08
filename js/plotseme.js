@@ -381,7 +381,6 @@ function fileDeleteFunction(path, name, sort_by)
 {
 	
 	//alert(path+" -> "+name);
-	//fileBrowseFunction("","name");
 	
 	var xmlHttp;
 	var $url = 'index.php';
@@ -402,6 +401,31 @@ function fileDeleteFunction(path, name, sort_by)
         }
 	}
 	
+}
+
+function fileNewFolderFunction(path, name, sort_by)
+{
+	alert(path+" -> "+name);
+	
+	var xmlHttp;
+	var $url = 'index.php';
+	
+	xmlHttp = getHTTPObject();
+	xmlHttp.open("GET",$url+'?file_new_folder='+name+'&file_browse='+path+'&sort_by='+sort_by,true);
+    xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
+	xmlHttp.setRequestHeader("Cache-Control", "no-cache");
+    xmlHttp.send(null);
+    
+    //document.getElementById('file_browser').innerHTML="Loading. Please wait...";
+    
+	xmlHttp.onreadystatechange=function()
+	{
+		if(xmlHttp.readyState==4)
+		{
+			document.getElementById('file_browser').innerHTML = xmlHttp.responseText;
+        }
+	}
+
 }
 
 // INSERT TAG _______________

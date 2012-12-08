@@ -27,17 +27,17 @@ function twit($message){
 		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 	}
 
-	//$pageURL = urlencode($pageURL);
+	$pageURL =rawurlencode(rawurlencode($pageURL));
 	
 	//$html = $pageURL."<br />";
-	//$html .= "<a rel=\"nofollow\" target=\"_blank\" href=\"http://twitter.com/home/?status=".$message." ".$pageURL."\">".$message."</a>";
-	//$twitturl .= "http://twitter.com/home/?status=".$message." ".$pageURL;
+	//$html = "<a rel=\"nofollow\" target=\"_blank\" href=\"http://twitter.com/home/?status=".$message." ".$pageURL."\">".$message."</a>";
+	$twitturl .= "http://twitter.com/home/?status=".$message." ".$pageURL;
 
-	//$html .= "<a href=\"javascript:window.open('".$twitturl."','".$message."','location=false, height=300, width=500');\">".$message." </a>";
+	$html = "<a href=\"javascript:window.open('".$twitturl."','".$message."','location=false, height=300, width=500');\">".$message."<img class=\"twitter_img\"src=\"../files/twitter.png\"></a>";
 	
+	return $html;
 	
-	
-
+/*
 	$html = "[html]";
 	$html .= "<a href=\"https://twitter.com/share\" title=\"".($message)."\" class=\"twitter-share-button\" data-text=\"".($message)."\" data-url=\"".$pageURL."\">".($message)."</a>";
 	$html .= "<script type=\"text/javascript\">\r";
@@ -53,7 +53,7 @@ function twit($message){
 	$html .= "</script>\r";
 	$html .= "[/html]";
 	return $html;
-	
+	*/
 	/*
 	$html .= "<a href=\"#\" onmousedown=\"popup('popup".stripslashes($name)."')\">".stripslashes($name)."</a>";
 	$html .= "<div class=\"popup\" id=\"popup".stripslashes($name)."\" style=\"display:none;\">";

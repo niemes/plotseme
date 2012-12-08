@@ -4,11 +4,13 @@
 		die("Hacking attempt");
 	}
 	
-	// defines	
+	// defines
+	
+	
 	define("SQL_HOST", "127.0.0.1");					// The web server MySql ("localhost" or "sql.xxx.com"...)
-	define("SQL_USER", "sqluser");							// MySql login
-	define("SQL_PASS", "sqluserpass");								// MySql password
-	define("SQL_DATABASE", "plot");					// MySql database name
+	define("SQL_USER", "sqluser");						// MySql login
+	define("SQL_PASS", "sqluserpass");					// MySql password
+	define("SQL_DATABASE", "plot");						// MySql database name
 	define("SQL_TABLE_PAGES", "plot_pages");			// MySql pages table name
 	define("SQL_TABLE_SESSIONS", "plot_sessions"); 		// Mysql sessions table name
 	define("SQL_TABLE_USERS", "plot_users"); 			// Mysql sessions table name
@@ -16,10 +18,10 @@
 	
 	define("FILES_FOLDER_NAME", "files");
 	define("SHOW_INVISBLE_PAGES", false); 				// show invisible pages to non-admin users ?
-	define("DEBUG", true); 							// debug ?
-	define("SITE_TITLE", "plotseme"); 			// web site title
+	define("DEBUG", false); 								// debug ?
+	define("SITE_TITLE", "plotseme"); 					// web site title
 	
-	define("ADMIN_USER_NAME", "plot"); 				// master user name
+	define("ADMIN_USER_NAME", "plot"); 					// master user name
 	define("ADMIN_USER_PASSWORD", "plot");				// master user password
 	
 	define("SITE_DESCRIPTION","plotseme web site");
@@ -30,6 +32,7 @@
 
 
 	// do not change anything bellow if you don't know what you'r doing
+	
 	
 	if (get_magic_quotes_gpc()) {
     	function stripslashes_gpc(&$value)

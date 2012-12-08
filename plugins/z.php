@@ -62,7 +62,7 @@ $parser->add_tag("list", "#\[list\](.*?)\[/list\]#si", "<ul>\\1</ul>"); //list
 $parser->add_tag("pre", "#\[pre\](.*?)\[/pre\]#si", "<pre>\\1</pre>"); //preformatted
 
 $parser->add_tag("img", "#\[img\](.*?)\[/img\]#si", "<img src=\"\\1\" alt=\"\\1\"/>"); //image [img]http://www.somewere.com/image.png[/img]
-$parser->add_tag("img=", "#\[img=(.*?)\](.*?)\[/img\]#si","<img src=\"\\1\" alt=\"\\2\" />"); //[img=campiong.png]camping[/img]
+$parser->add_tag("img alt=", "#\[img alt=(.*?)\](.*?)\[/img\]#si","<img src=\"\\2\" alt=\"\\1\" />"); //[img=campiong.png]camping[/img]
 $parser->add_tag("img right", "#\[img right\](.*?)\[/img\]#si", "<img align=\"right\" src=\"\\1\" alt=\"\\1\" />"); //image [img]http://www.somewere.com/image.png[/img]
 $parser->add_tag("img right=", "#\[img right=(.*?)\](.*?)\[/img\]#si","<img align=\"right\" src=\"\\1\" alt=\"\\2\" />"); //[img=campiong.png]camping[/img]
 $parser->add_tag("img left", "#\[img left\](.*?)\[/img\]#si", "<img align=\"left\" src=\"\\1\" alt=\"\\1\" />"); //image [img]http://www.somewere.com/image.png[/img]
