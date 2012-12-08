@@ -170,7 +170,7 @@
 	
 		log_err('save request: '.$_REQUEST['save']);
 		
-		$page_name = html_entity_decode(get_request('saveandclose'),ENT_QUOTES,"UTF-8");
+		$page_name = html_entity_decode(get_request('save'),ENT_QUOTES,"UTF-8");
 		
 		log_err('save name: '.$page_name);
 
