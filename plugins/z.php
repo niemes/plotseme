@@ -37,16 +37,17 @@ $parser->add_tag("sub", "#\[sub\](.*?)\[/sub\]#si", "<sub>\\1</sub>"); //subscri
 $parser->add_tag("sup", "#\[sup\](.*?)\[/sup\]#si", "<sup>\\1</sup>"); //superscript
 $parser->add_tag("color", "#\[color=(\#[0-9A-F]{6}|[a-z\-]+)\](.*?)\[/color\]#si", "<span style=\"color:\\1\">\\2</span>"); // text color
 $parser->add_tag("bgcolor", "#\[bgcolor=(\#[0-9A-F]{6}|[a-z\-]+)\](.*?)\[/bgcolor\]#si", "<span style=\"background:\\1\">\\2</span>"); // text bg color
+$parser->add_tag("font", "#\[font=(.*?)\](.*?)\[/font\]#si", "<span style=\"font:\\1\">\\2</span>"); // text font
 
 
 $parser->add_tag("size", "#\[size=([_a-z0-9-]+)](.*?)\[/size\]#si",  "<span style=\"font-size:\\1\">\\2</span>"); //text  size
 $parser->add_tag("blink", "#\[blink\](.*?)\[/blink\]#si", "<span class='blink'>\\1</span>"); //blink
 $parser->add_tag("highlight", "#\[highlight\](.*?)\[/highlight\]#si", "<span class=\"highlight\">\\1</span>"); //del
 
-$parser->add_tag("center", "#\[center\](.*?)\[/center\]#si", "<p class=\"center\">\\1</p>"); //center
-$parser->add_tag("left", "#\[left\](.*?)\[/left\]#si", "<p class=\"left\">\\1</p>"); //left
-$parser->add_tag("right", "#\[right\](.*?)\[/right\]#si", "<p class=\"right\">\\1</p>"); //right
-$parser->add_tag("justify", "#\[justify\](.*?)\[/justify\]#si", "<p class=\"justify\">\\1</p>"); //left
+$parser->add_tag("center", "#\[center\](.*?)\[/center\]#si", "<div class=\"center\">\\1</div>"); //center
+$parser->add_tag("left", "#\[left\](.*?)\[/left\]#si", "<div class=\"left\">\\1</div>"); //left
+$parser->add_tag("right", "#\[right\](.*?)\[/right\]#si", "<div class=\"right\">\\1</div>"); //right
+$parser->add_tag("justify", "#\[justify\](.*?)\[/justify\]#si", "<div class=\"justify\">\\1</div>"); //left
 
 $parser->add_tag("div", "#\[div\](.*?)\[/div\]#si", "<div>\\1</div>"); //div
 $parser->add_tag("div id=", "#\[div id=(.*?)\](.*?)\[/div\]#si", "<div id=\"\\1\">\\2</div>"); //div id=
@@ -72,7 +73,6 @@ $parser->add_tag("img width= height=", "#\[img width=(.*?) height=(.*?)\](.*?)\[
 $parser->add_tag("pde", "#\[pde\](.*?)\[/pde\]#si", "<applet code=\"\\1\" archive=\"pde/\\1.jar\" width=\"200\" height=\"200\" mayscript=\"true\"><param name=\"image\" value=\"loading.gif\"><param name=\"boxmessage\" value=\"Loading Processing software...\"><param name=\"boxbgcolor\" value=\"#FFFFFF\"><!-- This is the message that shows up when people don't have Java installed in their browser. -->To view this content, you need to install Java from <A HREF=\"http://java.com\">java.com</A></applet><br />Source code: <a href=\"pde/\\1.pde\">\\1</a>"); //processing [pde]pde_script_name[/pde]
 $parser->add_tag("movie", "#\[movie width=(.*?) height=(.*?)\](.*?)\[/movie\]#si", "<OBJECT CLASSID=\"clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B\" width=\"\\1\" height=\"\\2\"  CODEBASE=\"http://www.apple.com/qtactivex/qtplugin.cab\"><PARAM name=\"SRC\" VALUE=\"\\3\"><PARAM name=\"CONTROLLER\" VALUE=\"true\"><PARAM name=\"AUTOPLAY\" VALUE=\"false\"><embed src=\"\\3\" width=\"\\1\" height=\"\\2\" autoplay=\"false\" controller=\"true\" PLUGINSPAGE=\"http://www.apple.com/quicktime/download/\"></embed></object>"); //video [video]qt file[/video]
 $parser->add_tag("movie", "#\[movie\](.*?)\[/movie\]#si", "<OBJECT CLASSID=\"clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B\" CODEBASE=\"http://www.apple.com/qtactivex/qtplugin.cab\"><PARAM name=\"SRC\" VALUE=\"\\1\"><PARAM name=\"CONTROLLER\" VALUE=\"true\"><PARAM name=\"AUTOPLAY\" VALUE=\"false\"><embed src=\"\\1\" autoplay=\"false\" controller=\"true\" PLUGINSPAGE=\"http://www.apple.com/quicktime/download/\"></embed></object>"); //video [video]qt file[/video]
-//$parser->add_tag("flash", "#\[flash width=(.*?) height=(.*?)\](.*?)\[/flash\]#si","<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0\" width=\"\\1\" height=\"\\2\" align=\"top\"><param name=\"movie\" value=\"\\3\"><param name=\"quality\" value=\"high\"><embed src=\"\\3\" width=\"\\1\" height=\"\\2\" align=\"top\" quality=\"high\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" type=\"application/x-shockwave-flash\"></embed></object>", $text); //flash [flash width = x height = y]flashfile[/flash]
 
 $parser->add_tag("comments", "#\/\*(.+?)\*/#is", "<!-- \\1-->"); //tr
 ?>

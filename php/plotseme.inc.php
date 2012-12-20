@@ -99,35 +99,61 @@
 	function agregate_callback($matches) {
 		global $user;
 		 
-		$query = "SELECT name,modification_date FROM ".SQL_TABLE_PAGES;
-		$or = " WHERE ";
-	
-		$keywords = preg_split("/[,]+/", $matches[1]);
+		// build the query string
+		$query = "SELECT name,keywords,modification_date FROM ".SQL_TABLE_PAGES;
+		$query .= " WHERE(TRIM(IFNULL(keywords,'')) <> '')"; // only select pages with keywords
 		
-		
-		for ($i=0; $i < count($keywords); $i++) { 
-		
-			$query .=  $or."(keywords LIKE '%".mysql_real_escape_string(stripslashes(html_entity_decode(trim($keywords[$i]),ENT_QUOTES,"UTF-8")))."%')";
-			$or = " OR ";
+		if (!(SHOW_INVISBLE_PAGES or ($user->user_privilege>1))) {
+			$query .= " AND (name NOT LIKE '.%')"; // don't show hidden pages
 		}
 		
+		$query .= " ORDER BY modification_date DESC;"; 
 		
-			if (!(SHOW_INVISBLE_PAGES or ($user->user_privilege>1))) {
-				$query .= " AND name NOT LIKE '.%'"; // don't show hidden pages
-			}
+		// run the query
+		$result= mysql_query($query);
+		//var_dump($result);
+		$pageCount = mysql_num_rows($result);
 		
-		$query .= " ORDER BY modification_date DESC";
+		// buil array of keywords from query string. eg {foo, barr}
+		$pagesArray = array();
+		$queryKeywords = preg_split("/[,]+/", $matches[1]);
 		
-		$result= @mysql_query($query);
-		$i = mysql_num_rows($result);
+		// clean up the array (remove empty values).
+		foreach($queryKeywords as $key => $value) {
+			if(empty($value)) unset($queryKeywords[$key]);
+		}
+		log_err('{} keywords:'.$queryKeywords. '->'.count($queryKeywords));
 		
-		if ($i>0) {
-			$text = "<ul>";
+		if (($pageCount>0)&&(count($queryKeywords)>0)) {
+
+			
 			while ($row = mysql_fetch_assoc($result)) {
-				$text .= "<li>[".htmlentities($row['name'], ENT_QUOTES, "UTF-8")."]</li>";
+				$pageKeywords = preg_split("/[,]+/", $row['keywords']);
+				for ($pageKeywordsIndex=0; $pageKeywordsIndex < count($pageKeywords); $pageKeywordsIndex++) { 
+					$aKeyword = stripslashes(html_entity_decode(trim($pageKeywords[$pageKeywordsIndex]),ENT_QUOTES,"UTF-8"));
+					for ($queryKeywordsIndex=0; $queryKeywordsIndex < count($queryKeywords); $queryKeywordsIndex++) {
+						$aQueryKeyword = stripslashes(html_entity_decode(trim($queryKeywords[$queryKeywordsIndex]),ENT_QUOTES,"UTF-8"));
+						if (strcasecmp($aQueryKeyword,$aKeyword)==0)
+							$pagesArray[]=trim($row['name']);	
+					}
+				}
 			}
-			$text .= "</ul>";
+			
+			$pagesArray = array_unique($pagesArray);
+		} elseif (($pageCount>0)&&(count($queryKeywords)==0)) { // list all pages if query string is empty : {}
+			while ($row = mysql_fetch_assoc($result)) {
+				$pagesArray[]=trim($row['name']);
+			}
 		}
+		
+		
+		
+		foreach ($pagesArray as $pname) {
+    		$text .= "<li>[".htmlentities($pname, ENT_QUOTES, "UTF-8")."]</li>";
+		}
+
+			
+		log_err($query);
 		
 		mysql_free_result($result);
 		
@@ -135,15 +161,16 @@
 	}
 	
 	function reserve_callback($matches){
-	global $reserve;
+		global $reserve;
 	
 		$reserve[] = html_entity_decode(str_replace("\n","",$matches[1]));
 		return '%RESERVE%';
 	}
 	
+	
 	function reserve_back_callback($matches){
-	global $reserve_back_count;
-	global $reserve;
+		global $reserve_back_count;
+		global $reserve;
 			
 		$reserve_back_count ++;
 		//return html_entity_decode(str_replace("\n","",$reserve[$reserve_back_count-1]));	
@@ -152,8 +179,7 @@
 
 	
 	function get_search_form() { // return search form
-		
-		return "<input type='text' id='search_text' size='10' value='recherche' onblur=\"if (value == '') {value = 'recherche'}\" onfocus=\"if (value == 'recherche') {value =''}\" onkeypress=\"if {javascript:searchFunction();}\"/><input type='submit' value='?' onmouseup='javascript:searchFunction();'/>";
+		return "<input type='search' id='search_text' placeholder='recherche' results='5' autosave='".SITE_TITLE.".search_history' accesskey= 's' onkeypress=\"var key=event.keyCode || event.which; if (key==13) {javascript:searchFunction();}\"/>";
 	}
 	
 	

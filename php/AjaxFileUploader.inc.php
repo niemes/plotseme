@@ -1,27 +1,18 @@
 <?php
-/**
- * This class uploads a file, without refreshing the page (Using Javascript)
- * 
- * @author Rochak Chauhan
- * 
- * @todo all the PHP 4.x users are requested to remove "PUBLIC", "PRIVATE" and "PROTECTED" keywords before the functions
- * @version 2 
- * 
- */
+
 @session_start();
 class AjaxFileuploader {
-	// PHP 4.x users replace "PRIVATE" from the following lines with "var". Also remove all the PUBLIC, PRIVATE and PROTECTED Kaywords from the class
-	private $uploadDirectory='../files/';
+	private $uploadDirectory='../files';
 	private $uploaderIdArray=array();
 
-	/**
-	 * Constructor Function
-	 * 
-	 */
+	// constructor function
 	public function AjaxFileuploader($uploadDirectory) {
-		if (trim($uploadDirectory) != '' && is_dir($uploadDirectory)) {
-			$this->uploadDirectory=trim($uploadDirectory);
-		}
+		
+		//if (trim($uploadDirectory) != '' && is_dir('file://'.trim($uploadDirectory))) {
+		//	$this->uploadDirectory='file://'.trim($uploadDirectory);
+		//}
+		
+		$this->uploadDirectory=trim($uploadDirectory);
 	}
 
 	/**

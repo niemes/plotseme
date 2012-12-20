@@ -3,9 +3,11 @@
 	 * This file uploads a file in the back end, without refreshing the page
 	 *  
 	 */
-	echo "uploading...";
+	
 	session_start();
 	$dirName="../files/";
+	
+	if (isset($_REQUEST['dirname'])) $dirName= $_REQUEST['dirname'];
 	
 	if (isset($_POST['id'])) { // start uploading
 		
@@ -20,7 +22,6 @@
 			echo '<script>alert("Failed to upload file:'.$_FILES[$_POST['id']]['name'].'");</script>';
 		}
 		
-		echo "uploading ".($uploadFile);
 	}
 	else { // while uploading
 		

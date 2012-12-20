@@ -1,5 +1,7 @@
 <?php
 
+include_once 'geshi/geshi.php';
+
 if ( !defined('IN_PLOT') )
 {
 	die("Hacking attempt");

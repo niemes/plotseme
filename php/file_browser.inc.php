@@ -20,7 +20,6 @@
 	
 	if (isset($_REQUEST['path'])){
 		$path = $_REQUEST['path'];
-		//echo $path;
 	}
 	
 	// send file browser content

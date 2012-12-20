@@ -208,7 +208,7 @@
 			// generate html
 			//$this->html = '<form method="post" id="file_browser_form"><table id="fb" width="100%"><tr><td colspan="4">files';
 			$this->html = '<table id="fb" width="100%"><tr><td colspan="4">';
-			$this->html .='current directory is: '.$path;
+			$this->html .='current directory is: <span id="current_directory">'.$path.'<span>';
 			$this->html .='path up is: '.$path_up;
 			$this->html .='</td></tr><tr bgcolor="#999999"><th>Name<a href="javascript:fileBrowseFunction(\''.
 			($path).'\',\'name\')">#</a></th><th>Size<a href="javascript:fileBrowseFunction(\''.
@@ -240,7 +240,7 @@
 			
 	
 			require_once("AjaxFileUploader.inc.php");
-			$ajaxFileUploader = new AjaxFileuploader($uploadDirectory="../".FILES_FOLDER_NAME);	
+			$ajaxFileUploader = new AjaxFileuploader($uploadDirectory="../".FILES_FOLDER_NAME.'/'.$path);	
 			$html = $ajaxFileUploader->showFileUploader('id1');
 			
 			$html .= "<div id=\"process_upload_animation\"></div>\r";

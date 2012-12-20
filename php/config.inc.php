@@ -7,10 +7,10 @@
 	// defines
 	
 	
-	define("SQL_HOST", "127.0.0.1");					// The web server MySql ("localhost" or "sql.xxx.com"...)
-	define("SQL_USER", "sqluser");						// MySql login
-	define("SQL_PASS", "sqluserpass");					// MySql password
-	define("SQL_DATABASE", "plot");						// MySql database name
+	define("SQL_HOST", "localhost");					// The web server MySql ("localhost" or "sql.xxx.com"...)
+	define("SQL_USER", "mysqllogin");						// MySql login
+	define("SQL_PASS", "mysqlpassword");					// MySql password
+	define("SQL_DATABASE", "databasename");						// MySql database name
 	define("SQL_TABLE_PAGES", "plot_pages");			// MySql pages table name
 	define("SQL_TABLE_SESSIONS", "plot_sessions"); 		// Mysql sessions table name
 	define("SQL_TABLE_USERS", "plot_users"); 			// Mysql sessions table name

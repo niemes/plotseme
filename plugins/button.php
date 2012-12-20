@@ -15,12 +15,8 @@ $C = "\]";
 $tag1 = "button";
 $tag2 = "button alias";
 
-$parser->add_tag("button alias", "#{$O}({$tag2}=(.*?))({$C}((?>{$O}(?!/?{$tag1}[^{$O}]*?{$C})|[^{$O}]|(?R))*){$O})/{$tag1}{$C}#ise", "xbutton_alias('\\2','\\4')");
-$parser->add_tag("button", "#{$O}({$tag1})({$C}((?>{$O}(?!/?{$tag1}[^{$O}]*?{$C})|[^{$O}]|(?R))*){$O})/{$tag1}{$C}#ise", "xbutton('\\3')");
-
-//$parser->add_tag("button", "#\[button\](.*?)\[/button\]#sie", "xbutton('\\1')"); //image [img]http://www.somewere.com/image.png[/img]
-//$parser->add_tag("button alias", "#\[button=(.*?)\](.*?)\[/button\]#sie", "xbutton_alias('\\1','\\2')"); //image [img]http://www.somewere.com/image.png[/img]
-
+$parser->add_tag("button alias", "#{$O}({$tag2}=(.*?))({$C}((?>{$O}(?!/?{$tag1}[^{$O}]*?{$C})|[^{$O}]|(?R))*){$O})/{$tag1}{$C}#ise", "xbutton_alias('\\2','\\4')","[button alias=link]alias[/button]");
+$parser->add_tag("button", "#{$O}({$tag1})({$C}((?>{$O}(?!/?{$tag1}[^{$O}]*?{$C})|[^{$O}]|(?R))*){$O})/{$tag1}{$C}#ise", "xbutton('\\3')", "[button]link[/button]");
 
 function xbutton($name){
 	

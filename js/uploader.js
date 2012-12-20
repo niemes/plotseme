@@ -19,14 +19,14 @@ function createRequestObject() {
 }
 function traceUpload() {
    http.onreadystatechange = handleResponse;
-	//http.open("GET", 'php/file_upload.php?uploadDir='+uploadDir+'&dirname='+dirname+'&filename='+filename+'&uploader='+uploader); 
-	
+
    http.open("GET", 'php/file_upload.php?dirname='+dirname+'&filename='+filename+'&uploader='+uploader); 
    http.send(null);   
 }
 
 function handleResponse() {
-	
+				
+
 	if(http.readyState == 4){
 		var response=http.responseText; 
 		if(response.indexOf("upload_done") != -1){
@@ -34,7 +34,7 @@ function handleResponse() {
 			//document.getElementById("process_upload_list").innerHTML = response;
 			document.getElementById("process_upload_animation").innerHTML="";
 			document.getElementById("process_upload_button").disabled = false;
-			fileBrowseFunction("","name");
+			fileBrowseFunction(dirname,"name");
 			
 		} else {
 			document.getElementById("process_upload_animation").innerHTML=response;
@@ -56,16 +56,14 @@ function uploadFile(obj, dname) {
 	uploader = obj.name;
 	document.getElementById('formName'+obj.name).submit();
 	timeInterval=setInterval("traceUpload()", 1500);
-	
 }
 
 function fileBrowseFunction(path,sort_by)
 {
 	var xmlHttp;
-	var $url = 'index.php';
 	
 	xmlHttp = getHTTPObject();
-	xmlHttp.open("GET",$url+'?file_browse='+path+'&sort_by='+sort_by,true);
+	xmlHttp.open("GET",'index.php?file_browse='+encodeURIComponent(path)+'&sort_by='+sort_by,true);
     xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 	xmlHttp.setRequestHeader("Cache-Control", "no-cache");
     xmlHttp.send(null);
