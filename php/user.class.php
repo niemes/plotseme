@@ -53,7 +53,7 @@
                         $this->user_description = stripslashes(@mysql_result($result, 0, "description"));
                         $this->user_ok = TRUE;
 
-                        log_err('user '.$this->user_name.' logged-in');
+                        log_err('user '.$this->user_name.' logged-in with privilege : '.$this->user_privilege);
                     }
 
                     mysql_free_result($result);

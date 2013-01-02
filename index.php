@@ -7,8 +7,14 @@
 	global $page;
 	global $count_hit;
 	global $ajax;
-	global $page_name;
+	global $plot_page_name;
 	
+	global $plot_html_head_meta;
+	global $plot_html_head_script;	
+	
+	$plot_html_head_meta = array();
+	$plot_html_head_script = array();
+
 	// get includes
 	require_once('php/config.inc.php');
 	require_once('php/plotseme.inc.php');
@@ -170,9 +176,9 @@
 	
 		log_err('save request: '.$_REQUEST['save']);
 		
-		$page_name = html_entity_decode(get_request('save'),ENT_QUOTES,"UTF-8");
+		$plot_page_name = html_entity_decode(get_request('save'),ENT_QUOTES,"UTF-8");
 		
-		log_err('save name: '.$page_name);
+		log_err('save name: '.$plot_page_name);
 
 		if ($user->user_privilege>1){ // ok to save
 			$content = get_request('content');
@@ -180,11 +186,11 @@
 			$keywords = get_request('keywords');
 			$template = get_request('template');
 			
-			page_set_content($page_name,$content,$author,$keywords,$template);
+			page_set_content($plot_page_name,$content,$author,$keywords,$template);
 			echo("saved"); // echo save statut
 		} else {
-			log_err('Save : acces denied');
-			echo("error saving !");
+			//log_err('Save : acces denied');
+			echo("save : ACCESS DENIED");
 		}
 		
 		return;
@@ -192,9 +198,9 @@
 	} else if (isset($_REQUEST['saveandclose'])){ // save post and close edition field
 		log_err('save request: '.$_REQUEST['saveandclose']);
 		
-		$page_name = html_entity_decode(get_request('saveandclose'),ENT_QUOTES,"UTF-8");
+		$plot_page_name = html_entity_decode(get_request('saveandclose'),ENT_QUOTES,"UTF-8");
 		
-		log_err('save name: '.$page_name);
+		log_err('save name: '.$plot_page_name);
 
 		if ($user->user_privilege>1){ // ok to save
 			$content = get_request('content');
@@ -202,27 +208,27 @@
 			$keywords = get_request('keywords');
 			$template = get_request('template');
 			
-			page_set_content($page_name,$content,$author,$keywords,$template);
+			page_set_content($plot_page_name,$content,$author,$keywords,$template);
 		} else {
 			log_err('Save : acces denied');
 		}
 		
-		$page = new page($page_name);
+		$page = new page($plot_page_name);
 		
 	} elseif (isset($_GET['browse'])){ // browse get
 		
-		$page_name = get_request('browse');
-		log_err("browse name:".$page_name);
+		$plot_page_name = get_request('browse');
+		log_err("browse name:".$plot_page_name);
 		
-		$page = new page($page_name);	
+		$page = new page($plot_page_name);	
 		
 	} elseif (isset($_GET['edit'])){ // edit get
     
       
-		$page_name = get_request('edit');
-		$page = new page($page_name);
+		$plot_page_name = get_request('edit');
+		$page = new page($plot_page_name);
 		
-        log_err("edit request:".$page_name);
+        log_err("edit request:".$plot_page_name);
 
 		if ($user->user_privilege>1){ // ok to edit
 			
@@ -249,8 +255,8 @@
 		}
 		
 	} elseif (isset($_REQUEST['admin'])){ // admin page
-		$page_name = get_request('admin');
-		$page = new page($page_name);
+		$plot_page_name = get_request('admin');
+		$page = new page($plot_page_name);
 		
 		if ($user->user_privilege>1){ // ok to admin
 			
@@ -286,16 +292,16 @@
 		}
 		
 	} elseif (isset($_GET['search'])){ // search request
-		$page_name = get_request('search');
+		$plot_page_name = get_request('search');
 		
-		$page = new page($page_name);
+		$page = new page($plot_page_name);
 		$search = true;
 		
 	} elseif (isset($_GET['login'])){ // search request
 		$log_to_browse == true;
 		
-		$page_name = get_request('login');
-		$page = new page($page_name);
+		$plot_page_name = get_request('login');
+		$page = new page($plot_page_name);
 		$login = true;
 		
 	} elseif (isset($_REQUEST['logout'])){ //
@@ -304,15 +310,15 @@
 		setcookie('plotseme[u]', '', time());  /* user name cookie, expire nowr */
 		setcookie('plotseme[p]', '', time());  /* user pass (ashed), expire now */
 		
-		$page_name = get_request('logout');
-		log_err("log out to :".$page_name);
+		$plot_page_name = get_request('logout');
+		log_err("log out to :".$plot_page_name);
 		
-		$page = new page($page_name);	
+		$page = new page($plot_page_name);	
 		
 
 	} else { // catch all default -> browse?index
-		$page_name = SITE_INDEX;
-		$page = new page($page_name);	
+		$plot_page_name = SITE_INDEX;
+		$page = new page($plot_page_name);	
 	}
 	
 	if (!isset($edit)){
@@ -322,14 +328,14 @@
 			log_err('Admin: get admin form');
 			
 			$page->set_editable(false);
-			$content =	"<div id='content'>\n".get_admin_form($page_name)."</div>\n";
+			$content =	"<div id='content'>\n".get_admin_form($plot_page_name)."</div>\n";
 			$page->title = "Administration of ".SITE_TITLE;
 
 		} elseif ($login==true){
 			log_err('Edit: get login form');
 			
 			$page->set_editable(false);
-			$content =	"<div id='content'>\n".get_login_form($page_name,$log_to_admin)."</div>\n";
+			$content =	"<div id='content'>\n".get_login_form($plot_page_name,$log_to_admin)."</div>\n";
 			$page->title = "Login to ".SITE_TITLE;
 		
 		} elseif ($search==true){
@@ -341,7 +347,7 @@
 		} else {
 			
 			if (!$page->text){
-				$page->set_text("Empty page: " . ($page_name)."\n");
+				$page->set_text("Empty page: " . ($plot_page_name)."\n");
 			}
 			
 			$content ="<div id='content'>\n".($parser->parse($page->text))."</div>\n";
@@ -429,10 +435,19 @@
 <meta http-equiv='content-type' content='text/html; charset=utf-8' />
 <meta name="keywords" content="<?php echo SITE_KEYWORDS;?>" />
 <meta name="description" content="<?php echo SITE_DESCRIPTION;?>" />
-<meta name="viewport" content="width = 480" />
+<?php
+foreach ($plot_html_head_meta  as $line) {
+	echo $line."\n";
+}
+?>
 <link rel="stylesheet" href="php/css.php" />
-<script type="text/javascript" src="js/plotseme.js" ></script>
-<script type="text/javascript" src="js/uploader.js"></script>
+<script type="text/javascript" src="scripts/plotseme.js" ></script>
+<script type="text/javascript" src="scripts/uploader.js"></script>
+<?php
+foreach ($plot_html_head_script as $line) {
+	echo $line."\n";
+}
+?>
 <title>
 <?php
 	echo SITE_TITLE." | ".$page->name;

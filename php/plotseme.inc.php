@@ -179,7 +179,7 @@
 
 	
 	function get_search_form() { // return search form
-		return "<input type='search' id='search_text' placeholder='recherche' results='5' autosave='".SITE_TITLE.".search_history' accesskey= 's' onkeypress=\"var key=event.keyCode || event.which; if (key==13) {javascript:searchFunction();}\"/>";
+		return "<input type='search' id='search_text' placeholder='recherche' name='s' accesskey= 's' onkeypress=\"var key=event.keyCode || event.which; if (key==13) {javascript:searchFunction();}\"/>";
 	}
 	
 	

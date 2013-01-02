@@ -27,6 +27,7 @@
 		}
 		
 		function set_browse_dir($path){
+		
 			$this->browse_dir = $path;
 		}
 		
@@ -42,7 +43,6 @@
  			} else {
      			return substr($path, 0, strrpos(substr($path, 0, -1), "/")).'/';
  			}
-
 		}
 		
 		// get file size

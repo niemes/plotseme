@@ -303,6 +303,7 @@ function saveAndCloseFunction()
 	
 	var $url = 'index.php'; // default index.php
 	var $param = "content="+escape(encodeURIComponent(document.getElementById('edit_field').value))+"&saveandclose="+encodeURIComponent($name)+ "&author="+encodeURIComponent($author)+ "&keywords="+encodeURIComponent($keywords)+ "&template="+encodeURIComponent($template)+"&ajax";
+	
 	xmlHttp = getHTTPObject();
 	xmlHttp.open("POST", $url,true);
 	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");

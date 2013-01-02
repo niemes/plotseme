@@ -22,7 +22,7 @@ $parser->add_tag("processing", "#{$O}({$tag} {$param1}=(.*?) {$param2}=(.*?))({$
 function processing($sketch_path, $width="100", $height="100"){
 	
 	$html = "[html]";
-	$html .= "<div><script src='js/processing.js' type='text/javascript'></script>";
+	$html .= "<div><script src='scripts/processing.js' type='text/javascript'></script>";
 	$html .= "<script type='text/javascript'>";
 	$html .= "function getProcessingSketchId () { return '".$sketch_path."'; }\r";
 	$html .= "</script>";

@@ -26,7 +26,6 @@ function traceUpload() {
 
 function handleResponse() {
 				
-
 	if(http.readyState == 4){
 		var response=http.responseText; 
 		if(response.indexOf("upload_done") != -1){

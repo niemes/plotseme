@@ -12,9 +12,9 @@ if ( !defined('IN_PLOT') )
 
 //inline elements
 
-$parser->add_tag("tab", "(\t)", "&nbsp;&nbsp;&nbsp;&nbsp;"); //tab
+//$parser->add_tag("tab", "(\t)", "&nbsp;&nbsp;&nbsp;&nbsp;"); //tab
 
-$parser->add_tag("4 spaces", "(    )", "&nbsp;&nbsp;&nbsp;&nbsp;"); //4 spaces to tab
+//$parser->add_tag("4 spaces", "(    )", "&nbsp;&nbsp;&nbsp;&nbsp;"); //4 spaces to tab
 $parser->add_tag("note", "#\[note=(.*?)\]#si", "<sup id=\"fnref_\\1\"><a href=\"#fn_\\1\">\\1\</a></sup>", "[note=xxx] a footer note tag");
 $parser->add_tag("note ref", "#\[noteref=(.*?)\]#si", "<span id=\"fn_\\1\"><a href=\"#fnref_\\1\">\\1</a></span>", "[noteref=xxx], footer note back link tag."); // footnotes
 $parser->add_tag("url", "#\[url\](.*?)\[/url\]#si", "<a href=\"\\1\" target=\"_blank\" title=\"\\1 &#x2197;\">\\1</a>", "[url]http://www.example.com[/url], hyperlink tag."); // url [url]http://www.somewhere.org[/url]

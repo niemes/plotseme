@@ -16,7 +16,7 @@ $parser->add_tag("page", "#{$O}({$tag})({$C}((?>{$O}(?!/?{$tag}[^{$O}]*?{$C})|[^
 
 function page($thepage){
 	global $pagelist;
-	global $page_name;
+	global $plot_page_name;
 	
 	if(!isset($pagelist)) $pagelist = array("first");
 
@@ -27,7 +27,7 @@ function page($thepage){
 	$html = page_get_text($thepage);
 	//print_r($pagelist);
 	
-	if (in_array($thepage, $pagelist)) return "<div class='page_include'>overflow in page ".$thepage." from ".$page_name."</div>";
+	if (in_array($thepage, $pagelist)) return "<div class='page_include'>overflow in page ".$thepage." from ".$plot_page_name."</div>";
 	
 	array_push($pagelist,$thepage);
 	return  "<div class='page_include'>".$html."</div>";

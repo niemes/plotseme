@@ -31,17 +31,23 @@
 			$plugins_dir = $script_dir.'/plugins/'; // path to plugins folder
 			
 			
+			// include all plugin files
+			// a plugin file name must look like this : mysuperplugin.plugin.php		
 			if ($handle = @opendir($plugins_dir)) { // @ pour eviter l'affichage d'erreur php
 				while (($file = readdir($handle)) !== false) {
-					if (is_file($plugins_dir.$file)){ // it's a file
-						if (substr($file,0,1) != "." ) {	// show visible files only
-							include_once("plugins/".$file);
-						}
+					if (is_file($plugins_dir.$file)&& 				// it's a file
+						(substr($file,0,1) != "." )&& 				// visible
+						(substr($file,-11) == ".plugin.php" )&& 	// ending with .plugin.php
+						($file!="plostseme.plugin.php")) {			// don't load plotseme.plugin.php yet
+							include_once("plugins/".$file); 
 					}
 				}
+				include_once("plugins/plotseme.plugin.php"); // we want to load this one last.
 			} else {
 				$message= 'Can\'t find Plugins path';
 			}
+			
+			
 		}
 		
 		// Add new tag (name, search string, replace string)
